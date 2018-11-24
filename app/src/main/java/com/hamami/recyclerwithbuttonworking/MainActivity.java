@@ -11,6 +11,8 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+
+// did we commit to master????
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<ExampleItem> mExampleList;
