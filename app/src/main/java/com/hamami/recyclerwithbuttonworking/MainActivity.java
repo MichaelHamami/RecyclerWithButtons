@@ -12,7 +12,9 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 
-// did we commit to master????
+// did we commit to master???? yea from nayad
+// did the neyad commit to master???
+// sdsds asdas
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<ExampleItem> mExampleList;
