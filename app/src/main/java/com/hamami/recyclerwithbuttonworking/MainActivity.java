@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 // did we commit to master???? yea from nayad
 // did the neyad commit to master???
-// sdsds asdas
+// did we get to nayad pull from pc ???
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<ExampleItem> mExampleList;
