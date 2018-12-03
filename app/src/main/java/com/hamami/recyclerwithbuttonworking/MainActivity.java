@@ -5,17 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
-// did we commit to master???? yea from nayad
-// did the neyad commit to master???
-// did we get to nayad pull from pc ???
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     private ArrayList<ExampleItem> mExampleList;
 
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonRemove;
     private EditText editTextInsert;
     private EditText editTextRemove;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void insertItem(int position){
-        mExampleList.add(position,new ExampleItem(R.drawable.ic_android,"New item at Position"+position,"This is Line 2"));
+        mExampleList.add(position,new ExampleItem(R.drawable.ic_android,"New item at Position: "+position,"This is Line 2"));
         mAdapter.notifyItemInserted(position);
     }
     public void removeItem(int position){
@@ -79,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
             public void onDeleteClick(int position) {
                 removeItem(position);
             }
+
+            @Override
+            public void showPopupMenu(int position) {
+                showPopup(position);
+            }
         });
     }
     private void setButtons() {
@@ -101,6 +106,29 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.removeItem(position);
             }
         });
+    }
+    public void showPopup(int postion){
+        PopupMenu popup = new PopupMenu(this,findViewById(R.id.Recycler));
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_menu);
+        popup.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.items1:
+                Toast.makeText(this,"item 1 clicked",Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.items2:
+                Toast.makeText(this,"item 2 clicked",Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.items3:
+                Toast.makeText(this,"item 3 clicked",Toast.LENGTH_SHORT).show();
+                return true;
+                default:
+                    return false;
+        }
     }
 }
 

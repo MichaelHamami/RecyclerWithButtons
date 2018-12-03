@@ -20,6 +20,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public interface OnItemClickListener {
         void onItemClick(int position);
         void onDeleteClick(int position);
+        void showPopupMenu(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -30,6 +31,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
         public ImageView mDeleteImage;
+        public ImageView mMoreMenuImage;
         public TextView mTextView1;
         public TextView mTextView2;
 
@@ -39,6 +41,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             mTextView1 = itemView.findViewById(R.id.textView);
             mTextView2 = itemView.findViewById(R.id.textView2);
             mDeleteImage = itemView.findViewById(R.id.image_delete);
+            mMoreMenuImage = itemView.findViewById(R.id.image_menu);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +67,17 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
                     }
                 }
             });
+            mMoreMenuImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.showPopupMenu(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -79,18 +93,14 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExampleViewHolder exampleViewHolder, int i) {
-
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position, @NonNull List<Object> payloads) {
-        super.onBindViewHolder(holder, position, payloads);
+    public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         ExampleItem currentItem = mExampleList.get(position);
 
+//        holder.mMoreMenuImage.setImageResource(currentItem.getImageResource());
         holder.mImageView.setImageResource(currentItem.getImageResource());
         holder.mTextView1.setText(currentItem.getText1());
         holder.mTextView2.setText(currentItem.getText2());
+
     }
 
     @Override
